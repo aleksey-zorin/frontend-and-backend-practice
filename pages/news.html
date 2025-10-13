@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Новости</title>
-    <link rel="stylesheet" href="../style/styles.css"> <!-- Подключение стилей -->
+    <link rel="stylesheet" href="../style/styles.css">
 </head>
 <body>
     <div class="page-container">
-        <div class="header">Хэдер</div>
-        <div class="nav">
+        <header class="header">
+            <h1>Хэдер</h1>
+        </header>
+
+        <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
                 <li class="nav-item"><a class="nav-link" href="../pages/news.html">Новости</a></li>
@@ -17,26 +20,32 @@
                 <li class="nav-item"><a class="nav-link" href="../pages/goods.html">Товары</a></li>
                 <li class="nav-item"><a class="nav-link" href="../pages/contacts.html">Контакты</a></li>
             </ul>
-        </div>
+        </nav>
+
         <main class="content">
-            <div class="news-card">
-                <h2 class="news-title">Статья №1</h2>
-                <p class="news-date">Дата публикации: 01.01.2025 | Автор статьи: Зорин Алексей</p>
-                <p class="news-description">С новым годом, дорогие друзья, с новым счастьем!</p>
-            </div>
-            <div class="news-card">
-                <h2 class="news-title">Статья №2</h2>
-                <p class="news-date">Дата публикации: 23.02.2024 | Автор статьи: Федорок Артем</p>
-                <p class="news-description">С праздником, Мужчины!</p>
-            </div>
-            <div class="news-card">
-                <h2 class="news-title">Статья №3</h2>
-                <p class="news-date">Дата публикации: 08.03.2024 | Автор статьи: Свешников Максим</p>
-                <p class="news-description">С вашим праздником, наши прекрасные дамы!</p>
-            </div>
+            <section class="news-listing">
+                <h2>Последние новости</h2>
+                <article class="news-card">
+                    <h3 class="news-title">Статья №1</h3>
+                    <p class="news-date">Дата публикации: 01.01.2025 | Автор статьи: Зорин Алексей</p>
+                    <p class="news-description">С новым годом, дорогие друзья, с новым счастьем!</p>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Статья №2</h3>
+                    <p class="news-date">Дата публикации: 23.02.2024 | Автор статьи: Федорок Артем</p>
+                    <p class="news-description">С праздником, Мужчины!</p>
+                </article>
+                <article class="news-card">
+                    <h3 class="news-title">Статья №3</h3>
+                    <p class="news-date">Дата публикации: 08.03.2024 | Автор статьи: Свешников Максим</p>
+                    <p class="news-description">С вашим праздником, наши прекрасные дамы!</p>
+                </article>
+            </section>
         </main>
-        <div class="footer">Футер</div>
+
+        <footer class="footer">
+            <p>Футер</p>
+        </footer>
     </div>
 </body>
 </html>
-

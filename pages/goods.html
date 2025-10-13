@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Товары</title>
-    <link rel="stylesheet" href="../style/styles.css"> <!-- Подключение стилей -->
+    <link rel="stylesheet" href="../style/styles.css">
 </head>
 <body>
     <div class="page-container">
-        <header class="header">Хэдер</header>
+        <header class="header">
+            <h1>Хэдер</h1> 
+        </header>
+
         <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a class="nav-link" href="../index.html">Главная</a></li>
@@ -18,24 +21,31 @@
                 <li class="nav-item"><a class="nav-link" href="../pages/contacts.html">Контакты</a></li>
             </ul>
         </nav>
+
         <main class="content">
-            <div class="product-card">
-                <img src="../images/product1.jpeg" alt="Товар 1" class="product-image" width="300" height="200">
-                <h2 class="product-title">Товар 1</h2>
-                <p class="product-price">Цена: 1,500₽</p>
-            </div>
-            <div class="product-card">
-                <img src="../images/product2.jpeg" alt="Товар 2" class="product-image" width="300" height="200">
-                <h2 class="product-title">Товар 2</h2>
-                <p class="product-price">Цена: 250,000₽</p>
-            </div>
-            <div class="product-card">
-                <img src="../images/product3.jpeg" alt="Товар 3" class="product-image" width="300" height="200">
-                <h2 class="product-title">Товар 3</h2>
-                <p class="product-price">Цена: 100,000$</p>
-            </div>
+            <section class="products">
+                <h2>Наши товары</h2> 
+                <article class="product-card">
+                    <img src="../images/product1.jpeg" alt="Товар 1" class="product-image" width="300" height="200">
+                    <h3 class="product-title">Товар 1</h3>
+                    <p class="product-price">Цена: 1,500₽</p>
+                </article>
+                <article class="product-card">
+                    <img src="../images/product2.jpeg" alt="Товар 2" class="product-image" width="300" height="200">
+                    <h3 class="product-title">Товар 2</h3>
+                    <p class="product-price">Цена: 250,000₽</p>
+                </article>
+                <article class="product-card">
+                    <img src="../images/product3.jpeg" alt="Товар 3" class="product-image" width="300" height="200">
+                    <h3 class="product-title">Товар 3</h3>
+                    <p class="product-price">Цена: 100,000$</p>
+                </article>
+            </section>
         </main>
-        <footer class="footer">Футер</footer>
+
+        <footer class="footer">
+            <p>Футер</p> 
+        </footer>
     </div>
 </body>
 </html>
