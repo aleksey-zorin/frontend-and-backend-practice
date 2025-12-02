@@ -3,573 +3,823 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты</title>
+    <title>Контакты - Портфолио Алексея Зорина</title>
+    <meta name="description" content="Контактная информация и форма обратной связи для связи с Алексеем Зориным">
+    <link rel="stylesheet" href="../style/styles.css">
     <style>
-        /* CSS переменные */
-        :root {
-            /* Цветовая палитра */
-            --color-primary: #e240b7;
-            --color-primary-dark: #764ba2;
-            --color-secondary: #f8f9fa;
-            --color-accent: #5e329b;
-            --color-accent-light: #34495e;
-            --color-text: #2c3e50;
-            --color-text-light: #ffffff;
-            --color-border: #e9ecef;
-            --color-error: #e74c3c;
-            --color-background: #ffffff;
-            --color-surface: #f8f9fa;
-            
-            /* Типографика */
-            --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-size-sm: 0.875rem;
-            --font-size-base: 1rem;
-            --font-size-lg: 1.125rem;
-            --font-size-xl: 1.25rem;
-            --font-size-2xl: 1.5rem;
-            --font-weight-normal: 400;
-            --font-weight-semibold: 600;
-            --font-weight-bold: 700;
-            
-            /* Размеры и отступы */
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 0.75rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 1.5rem;
-            --spacing-xl: 2rem;
-            --border-radius-sm: 4px;
-            --border-radius-md: 6px;
-            --border-radius-lg: 8px;
-            --border-radius-xl: 12px;
-            
-            /* Тени */
-            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
-            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.3);
-            
-            /* Анимации */
-            --transition-fast: 0.15s ease;
-            --transition-base: 0.3s ease;
-            --transition-slow: 0.5s ease;
+        /* Стили для доступности */
+        :focus {
+            outline: 3px solid var(--color-primary);
+            outline-offset: 2px;
         }
-
-        /* Темная тема */
-        [data-theme="dark"] {
-            --color-primary: #7c93e6;
-            --color-primary-dark: #8a68b3;
-            --color-secondary: #2d3748;
-            --color-accent: #e2e8f0;
-            --color-accent-light: #cbd5e0;
-            --color-text: #e2e8f0;
-            --color-text-light: #ffffff;
-            --color-border: #4a5568;
-            --color-error: #fc8181;
-            --color-background: #1a202c;
-            --color-surface: #2d3748;
+        
+        .show-focus *:focus {
+            outline: 3px solid var(--color-primary) !important;
+            outline-offset: 2px;
         }
-
-        /* Базовые стили */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-family-base);
-            background-color: var(--color-background);
-            color: var(--color-text);
-            transition: background-color var(--transition-base), color var(--transition-base);
-            line-height: 1.6;
-        }
-
-        /* Блок: page */
-        .page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Блок: header */
-        .header {
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-            color: var(--color-text-light);
-            padding: var(--spacing-xl);
-            text-align: center;
-        }
-
-        .header__title {
-            margin: 0;
-            font-size: var(--font-size-2xl);
-            font-weight: var(--font-weight-bold);
-        }
-
-        /* Блок: nav */
-        .nav {
-            background-color: var(--color-surface);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .nav__list {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav__item {
-            margin: 0;
-        }
-
-        .nav__link {
-            display: block;
-            padding: var(--spacing-md) var(--spacing-lg);
-            color: var(--color-text);
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: white;
+            padding: 8px;
             text-decoration: none;
-            font-weight: var(--font-weight-semibold);
-            transition: all var(--transition-base);
-            position: relative;
+            z-index: 1001;
+            border-radius: 4px;
         }
-
-        .nav__link:hover,
-        .nav__link:focus {
-            background-color: var(--color-primary);
-            color: var(--color-text-light);
-            transform: translateY(-1px);
+        
+        .skip-link:focus {
+            top: 0;
         }
-
-        .nav__link--active {
-            background-color: var(--color-primary);
-            color: var(--color-text-light);
+        
+        /* Скрытый элемент для скринридеров */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
-
-        /* Блок: content */
-        .content {
-            padding: var(--spacing-xl);
+        
+        /* Контейнер контактов */
+        .contacts-container {
             max-width: 1200px;
             margin: 0 auto;
-            flex: 1;
+            padding: 2rem;
         }
-
-        /* Блок: contacts */
-        .contacts {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contacts__title {
+        
+        .contacts-title {
             text-align: center;
-            margin-bottom: var(--spacing-xl);
-            color: var(--color-text);
-            font-size: var(--font-size-2xl);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
         }
-
-        .contacts__info {
-            margin-bottom: var(--spacing-lg);
-            padding: var(--spacing-lg);
-            background-color: var(--color-surface);
-            border-radius: var(--border-radius-md);
-            border-left: 4px solid var(--color-primary);
-            transition: all var(--transition-base);
-        }
-
-        .contacts__info:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .contacts__info-title {
-            margin-top: 0;
-            color: var(--color-text);
-            font-size: var(--font-size-xl);
-        }
-
-        .contacts__grid {
+        
+        .contacts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
-            margin: var(--spacing-xl) 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
-
-        .contacts__item {
-            background: var(--color-surface);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-md);
-            border-left: 4px solid var(--color-primary);
-            transition: all var(--transition-base);
+        
+        @media (max-width: 768px) {
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
         }
-
-        .contacts__item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+        
+        /* Форма обратной связи */
+        .contact-form {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-
-        .contacts__item-title {
-            margin-top: 0;
-            color: var(--color-text);
-            font-size: var(--font-size-lg);
+        
+        .form-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
         }
-
-        /* Блок: button */
-        .button {
-            padding: var(--spacing-md) var(--spacing-xl);
-            border: none;
-            border-radius: var(--border-radius-md);
-            font-size: var(--font-size-lg);
-            cursor: pointer;
-            transition: all var(--transition-base);
-            font-weight: var(--font-weight-semibold);
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
+        
+        fieldset {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
-
-        .button--primary {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-            color: var(--color-text-light);
+        
+        legend {
+            font-weight: 600;
+            padding: 0 1rem;
+            color: var(--text-primary);
+            font-size: 1.2rem;
         }
-
-        .button--primary:hover,
-        .button--primary:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        
+        .form-group {
+            margin-bottom: 1.5rem;
         }
-
-        .button--secondary {
-            background: var(--color-secondary);
-            color: var(--color-text);
-            border: 2px solid var(--color-border);
-        }
-
-        .button--secondary:hover,
-        .button--secondary:focus {
-            background: var(--color-border);
-        }
-
-        .button--center {
+        
+        .form-label {
             display: block;
-            margin: var(--spacing-xl) auto 0;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
-
-        /* Блок: modal */
-        .modal::backdrop {
-            background: rgba(0, 0, 0, 0.6);
-            animation: fadeIn var(--transition-base);
+        
+        .required::after {
+            content: " *";
+            color: var(--error-color);
         }
-
-        .modal {
-            border: none;
-            border-radius: var(--border-radius-xl);
-            padding: 0;
-            box-shadow: var(--shadow-lg);
-            animation: slideIn var(--transition-base);
-            max-width: 500px;
-            width: 90vw;
-            max-height: 90vh;
-            overflow-y: auto;
-            background: var(--color-background);
-        }
-
-        .modal__header {
-            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
-            color: var(--color-text-light);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
-            margin: 0;
-        }
-
-        .modal__title {
-            margin: 0;
-            color: var(--color-text-light);
-            font-size: var(--font-size-xl);
-        }
-
-        .modal__content {
-            padding: var(--spacing-xl);
-        }
-
-        /* Блок: form */
-        .form__group {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .form__label {
-            display: block;
-            margin-bottom: var(--spacing-xs);
-            font-weight: var(--font-weight-semibold);
-            color: var(--color-text);
-        }
-
-        .form__input,
-        .form__select,
-        .form__textarea {
+        
+        .form-input,
+        .form-textarea,
+        .form-select {
             width: 100%;
-            padding: var(--spacing-sm);
-            border: 2px solid var(--color-border);
-            border-radius: var(--border-radius-md);
-            font-size: var(--font-size-base);
-            transition: border-color var(--transition-base);
-            box-sizing: border-box;
-            background: var(--color-background);
-            color: var(--color-text);
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            background: var(--background-color);
+            color: var(--text-primary);
+            transition: border-color 0.3s ease;
         }
-
-        .form__input:focus,
-        .form__select:focus,
-        .form__textarea:focus {
-            outline: none;
-            border-color: var(--color-primary);
+        
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: var(--primary-color);
         }
-
-        .form__textarea {
-            min-height: 100px;
+        
+        .form-textarea {
+            min-height: 120px;
             resize: vertical;
         }
-
-        .form__required {
-            color: var(--color-error);
+        
+        .form-hint {
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            color: var(--text-secondary);
         }
-
-        .form__actions {
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .form-input:invalid:not(:focus):not(:placeholder-shown) + .error-message,
+        .form-textarea:invalid:not(:focus):not(:placeholder-shown) + .error-message {
+            display: block;
+        }
+        
+        /* Информация о контактах */
+        .contact-info {
+            background: var(--surface-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .info-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .contact-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .contact-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--background-color);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .contact-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .contact-item-value {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .copy-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover,
+        .copy-btn:focus {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn:active {
+            transform: translateY(0);
+        }
+        
+        .copy-btn.copied {
+            background: var(--success-color);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover,
+        .btn-primary:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(226, 64, 183, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--background-color);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .btn-secondary:hover,
+        .btn-secondary:focus {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Живой регион для уведомлений */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        
+        .notification.error {
+            background: var(--error-color);
+        }
+        
+        /* Социальные ссылки */
+        .social-links {
             display: flex;
-            gap: var(--spacing-md);
-            justify-content: flex-end;
-            margin-top: var(--spacing-xl);
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
         }
-
-        /* Блок: footer */
-        .footer {
-            background-color: var(--color-surface);
-            color: var(--color-text);
-            text-align: center;
-            padding: var(--spacing-lg);
-            border-top: 1px solid var(--color-border);
-            margin-top: auto;
+        
+        .social-link {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
-
-        /* Блок: theme-switcher */
+        
+        .social-link:hover,
+        .social-link:focus {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        /* High contrast для темной темы */
+        @media (prefers-contrast: high) {
+            .form-input,
+            .form-textarea,
+            .form-select {
+                border: 3px solid var(--text-primary);
+            }
+            
+            .contact-item {
+                border-left-width: 6px;
+            }
+            
+            .copy-btn,
+            .btn-primary,
+            .social-link {
+                border: 2px solid var(--text-primary);
+            }
+        }
+        
+        /* Уменьшение движения для чувствительных пользователей */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .copy-btn:hover,
+            .copy-btn:focus,
+            .btn-primary:hover,
+            .btn-primary:focus,
+            .btn-secondary:hover,
+            .btn-secondary:focus,
+            .social-link:hover,
+            .social-link:focus {
+                transform: none;
+            }
+        }
+        
+        /* Стили для темы */
         .theme-switcher {
             position: fixed;
-            top: var(--spacing-md);
-            right: var(--spacing-md);
+            top: 20px;
+            right: 20px;
             z-index: 1000;
         }
-
+        
         .theme-switcher__button {
-            background: var(--color-primary);
-            color: var(--color-text-light);
-            border: none;
+            background: var(--surface-color);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
             border-radius: 50%;
             width: 50px;
             height: 50px;
+            font-size: 1.5rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: var(--font-size-lg);
-            transition: all var(--transition-base);
-            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
         }
-
-        .theme-switcher__button:hover {
+        
+        .theme-switcher__button:hover,
+        .theme-switcher__button:focus {
+            border-color: var(--primary-color);
             transform: scale(1.1);
-            box-shadow: var(--shadow-lg);
         }
-
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        
+        /* Навигация */
+        .nav {
+            background: var(--surface-color);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        @keyframes slideIn {
-            from { 
-                opacity: 0;
-                transform: translateY(-50px) scale(0.9);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        
+        .nav__list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
         }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .modal {
-                margin: var(--spacing-md);
-                width: calc(100vw - 2rem);
-            }
-            
-            .form__actions {
-                flex-direction: column;
-            }
-            
-            .button {
-                width: 100%;
-            }
-            
-            .nav__list {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .theme-switcher {
-                position: static;
-                text-align: center;
-                margin: var(--spacing-md) 0;
-            }
-            
-            .theme-switcher__button {
-                border-radius: var(--border-radius-md);
-                width: auto;
-                padding: var(--spacing-sm) var(--spacing-md);
-            }
+        
+        .nav__link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
-
-        @media (max-width: 480px) {
-            .contacts__grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .content {
-                padding: var(--spacing-md);
-            }
+        
+        .nav__link:hover,
+        .nav__link:focus {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .nav__link--active {
+            background: var(--primary-color);
+            color: white;
+            position: relative;
+        }
+        
+        .nav__link--active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+        
+        /* Хедер */
+        .header {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+        
+        .header__title {
+            font-size: 3rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        /* Футер */
+        .footer {
+            background: var(--surface-color);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .footer__content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer__copyright {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .footer__links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer__link {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer__link:hover,
+        .footer__link:focus {
+            color: var(--primary-color);
+            text-decoration: underline;
         }
     </style>
 </head>
 <body class="page">
     <div class="page__container">
+        <!-- Пропустить навигацию (для скринридеров) -->
+        <a href="#main-content" class="skip-link" id="skip-link">
+            Перейти к основному содержанию
+        </a>
+
         <!-- Переключатель темы -->
         <div class="theme-switcher">
-            <button class="theme-switcher__button" id="themeToggle" aria-label="Переключить тему">
+            <button class="theme-switcher__button" id="themeToggle" 
+                    aria-label="Переключить тему" 
+                    aria-pressed="false">
                 🌙
             </button>
         </div>
 
+        <!-- Шапка -->
         <header class="header">
             <h1 class="header__title">Контакты</h1>
         </header>
 
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a class="nav__link" href="../index.html">Главная</a>
+        <!-- Основная навигация -->
+        <nav class="nav" aria-label="Основная навигация">
+            <ul class="nav__list" role="menubar">
+                <li class="nav__item" role="none">
+                    <a class="nav__link" 
+                       href="../index.html" 
+                       role="menuitem">
+                        Главная
+                    </a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="../pages/news.html">Новости</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" 
+                       href="projects.html" 
+                       role="menuitem">
+                        Проекты
+                    </a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="../pages/practices.html">Практики(скоро)</a>
+                <li class="nav__item" role="none">
+                    <a class="nav__link" 
+                       href="diary.html" 
+                       role="menuitem">
+                        Дневник
+                    </a>
                 </li>
-                <li class="nav__item">
-                    <a class="nav__link" href="../pages/goods.html">Товары</a>
-                </li>
-                <li class="nav__item">
-                    <a class="nav__link nav__link--active" href="../pages/contacts.html">Контакты</a>
+                <li class="nav__item" role="none" aria-current="page">
+                    <a class="nav__link nav__link--active" 
+                       href="contacts.html" 
+                       role="menuitem">
+                        Контакты
+                    </a>
                 </li>
             </ul>
         </nav>
 
-        <main class="content">
-            <section class="contacts">
-                <h2 class="contacts__title">Контактная информация</h2>
-                
-                <article class="contacts__info">
-                    <h3 class="contacts__info-title">Электронная почта</h3>
-                    <p>Адрес электронной почты: aleksey.zorin8@nemail.ru</p>
-                </article>
-                
-                <article class="contacts__info">
-                    <h3 class="contacts__info-title">Физический адрес</h3>
-                    <p>Адрес: Япония, ул. Шибуя, д. 11</p>
-                </article>
+        <!-- Основное содержание -->
+        <main id="main-content" class="contacts-container" tabindex="-1">
+            <h1 class="contacts-title">Свяжитесь со мной</h1>
+            
+            <!-- Живой регион для уведомлений -->
+            <div class="notification" 
+                 role="alert" 
+                 aria-live="polite" 
+                 aria-atomic="true"
+                 id="notification"
+                 lang="ru">
+                Сообщение успешно скопировано!
+            </div>
 
-                <div class="contacts__grid">
-                    <div class="contacts__item">
-                        <h3 class="contacts__item-title">Телефон</h3>
-                        <p>+7 (985) 385-83-35</p>
-                    </div>
-                    <div class="contacts__item">
-                        <h3 class="contacts__item-title">Время работы</h3>
-                        <p>Пн-Вс: 20:00-21:00</p>
-                    </div>
-                    <div class="contacts__item">
-                        <h3 class="contacts__item-title">Наши Социальные сети</h3>
-                        <p>Одноклассники, Steam, Telegram, WhatsApp</p>
-                    </div>
-                </div>
+            <div class="contacts-grid">
+                <!-- Форма обратной связи -->
+                <section class="contact-form" aria-labelledby="form-title">
+                    <h2 class="form-title" id="form-title">Форма обратной связи</h2>
+                    
+                    <form id="feedback-form" novalidate>
+                        <!-- Персональные данные -->
+                        <fieldset aria-labelledby="personal-info-legend">
+                            <legend id="personal-info-legend">Персональные данные</legend>
+                            
+                            <div class="form-group">
+                                <label for="name" class="form-label required">
+                                    Ваше имя
+                                </label>
+                                <input type="text" 
+                                       id="name" 
+                                       name="name"
+                                       class="form-input"
+                                       required
+                                       aria-required="true"
+                                       aria-invalid="false"
+                                       aria-describedby="name-error name-hint"
+                                       placeholder="Введите ваше имя"
+                                       minlength="2"
+                                       maxlength="50">
+                                <span id="name-hint" class="form-hint">
+                                    От 2 до 50 символов
+                                </span>
+                                <span id="name-error" class="error-message" role="alert">
+                                    Пожалуйста, введите ваше имя (от 2 до 50 символов)
+                                </span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label required">
+                                    Электронная почта
+                                </label>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email"
+                                       class="form-input"
+                                       required
+                                       aria-required="true"
+                                       aria-invalid="false"
+                                       aria-describedby="email-error"
+                                       placeholder="example@mail.ru">
+                                <span id="email-error" class="error-message" role="alert">
+                                    Пожалуйста, введите корректный email адрес
+                                </span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" class="form-label">
+                                    Телефон
+                                </label>
+                                <input type="tel" 
+                                       id="phone" 
+                                       name="phone"
+                                       class="form-input"
+                                       pattern="[\+]\d{1}\s?[\(]{0,1}\d{3}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+                                       aria-describedby="phone-hint phone-error"
+                                       placeholder="+7 (XXX) XXX-XX-XX">
+                                <span id="phone-hint" class="form-hint">
+                                    Формат: +7 (XXX) XXX-XX-XX
+                                </span>
+                                <span id="phone-error" class="error-message" role="alert">
+                                    Пожалуйста, введите корректный номер телефона
+                                </span>
+                            </div>
+                        </fieldset>
+                        
+                        <!-- Тема сообщения -->
+                        <fieldset aria-labelledby="message-legend">
+                            <legend id="message-legend">Тема сообщения</legend>
+                            
+                            <div class="form-group">
+                                <label for="category" class="form-label required">
+                                    Категория обращения
+                                </label>
+                                <select id="category" 
+                                        name="category"
+                                        class="form-select"
+                                        required
+                                        aria-required="true"
+                                        aria-describedby="category-hint">
+                                    <option value="" selected disabled>
+                                        Выберите категорию
+                                    </option>
+                                    <option value="technical">Техническая поддержка</option>
+                                    <option value="commercial">Коммерческое предложение</option>
+                                    <option value="cooperation">Сотрудничество</option>
+                                    <option value="complaint">Жалоба</option>
+                                    <option value="suggestion">Предложение</option>
+                                    <option value="bug">Нашли баг</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                                <span id="category-hint" class="form-hint">
+                                    Выберите наиболее подходящую категорию
+                                </span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">
+                                    Тема письма
+                                </label>
+                                <input type="text" 
+                                       id="subject" 
+                                       name="subject"
+                                       class="form-input"
+                                       aria-describedby="subject-hint"
+                                       placeholder="Краткое описание темы"
+                                       maxlength="100">
+                                <span id="subject-hint" class="form-hint">
+                                    Не более 100 символов
+                                </span>
+                            </div>
+                        </fieldset>
+                        
+                        <!-- Текст сообщения -->
+                        <div class="form-group">
+                            <label for="message" class="form-label required">
+                                Текст обращения
+                            </label>
+                            <textarea id="message" 
+                                      name="message"
+                                      class="form-textarea"
+                                      required
+                                      aria-required="true"
+                                      aria-invalid="false"
+                                      aria-describedby="message-error message-hint"
+                                      placeholder="Опишите вашу проблему или вопрос..."
+                                      minlength="10"
+                                      maxlength="1000"></textarea>
+                            <span id="message-hint" class="form-hint">
+                                Минимум 10 символов, максимум 1000
+                            </span>
+                            <span id="message-error" class="error-message" role="alert">
+                                Пожалуйста, введите текст обращения (от 10 до 1000 символов)
+                            </span>
+                        </div>
+                        
+                        <!-- Кнопки формы -->
+                        <div class="form-group" role="group" aria-label="Действия формы">
+                            <button type="submit" 
+                                    class="btn-primary"
+                                    aria-label="Отправить форму обратной связи">
+                                Отправить сообщение
+                            </button>
+                            
+                            <button type="reset" 
+                                    class="btn-secondary"
+                                    aria-label="Очистить форму">
+                                Очистить форму
+                            </button>
+                        </div>
+                    </form>
+                </section>
                 
-                <button class="button button--primary button--center" onclick="contactModal.showModal()">
-                    Связаться с нами
-                </button>
-            </section>
+                <!-- Контактная информация -->
+                <section class="contact-info" aria-labelledby="info-title">
+                    <h2 class="info-title" id="info-title">Контактная информация</h2>
+                    
+                    <ul class="contact-list" role="list">
+                        <li class="contact-item" role="listitem">
+                            <h3 class="contact-item-title" id="email-title">
+                                Электронная почта
+                            </h3>
+                            <p class="contact-item-value" 
+                               aria-labelledby="email-title"
+                               id="email-value">
+                                aleksey.zorin8@nemail.ru
+                            </p>
+                            <button class="copy-btn" 
+                                    data-copy="aleksey.zorin8@nemail.ru"
+                                    aria-label="Скопировать email адрес"
+                                    data-original-label="Скопировать email адрес">
+                                Скопировать email
+                            </button>
+                        </li>
+                        
+                        <li class="contact-item" role="listitem">
+                            <h3 class="contact-item-title" id="phone-title">
+                                Телефон
+                            </h3>
+                            <p class="contact-item-value" 
+                               aria-labelledby="phone-title"
+                               id="phone-value">
+                                +7 (985) 385-83-35
+                            </p>
+                            <button class="copy-btn" 
+                                    data-copy="+79853858335"
+                                    aria-label="Скопировать номер телефона"
+                                    data-original-label="Скопировать номер телефона">
+                                Скопировать номер
+                            </button>
+                        </li>
+                        
+                        <li class="contact-item" role="listitem">
+                            <h3 class="contact-item-title" id="address-title">
+                                Физический адрес
+                            </h3>
+                            <p class="contact-item-value" 
+                               aria-labelledby="address-title"
+                               id="address-value">
+                                Япония, ул. Шибуя, д. 11
+                            </p>
+                            <button class="copy-btn" 
+                                    data-copy="Япония, ул. Шибуя, д. 11"
+                                    aria-label="Скопировать адрес"
+                                    data-original-label="Скопировать адрес">
+                                Скопировать адрес
+                            </button>
+                        </li>
+                        
+                        <li class="contact-item" role="listitem">
+                            <h3 class="contact-item-title" id="hours-title">
+                                Время работы
+                            </h3>
+                            <p class="contact-item-value" aria-labelledby="hours-title">
+                                Понедельник - Воскресенье: 20:00 - 21:00
+                            </p>
+                        </li>
+                        
+                        <li class="contact-item" role="listitem">
+                            <h3 class="contact-item-title" id="social-title">
+                                Социальные сети
+                            </h3>
+                            <p class="contact-item-value" aria-labelledby="social-title">
+                                Одноклассники, Steam, Telegram, WhatsApp
+                            </p>
+                            <div class="social-links">
+                                <a href="https://t.me" 
+                                   class="social-link"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="Перейти в Telegram (откроется в новой вкладке)">
+                                    Telegram
+                                </a>
+                                <a href="https://wa.me/79853858335" 
+                                   class="social-link"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="Перейти в WhatsApp (откроется в новой вкладке)">
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
         </main>
 
         <footer class="footer">
-            <p>&copy; Человек года 2006. Все права защищены. Сайт от 2025.</p>
+            <div class="footer__content">
+                <p class="footer__copyright">&copy; Человек года 2006. 2025. Зорин Portfolio</p>
+                <div class="footer__links">
+                    <a href="mailto:aleksey.zorin8@nemail.ru" class="footer__link">aleksey.zorin8@nemail.ru</a>
+                    <a href="https://steamcommunity.com" class="footer__link" target="_blank" rel="noopener noreferrer">Steam</a>
+                </div>
+            </div>
         </footer>
-
-        <!-- Модальное окно -->
-        <dialog class="modal" id="contactModal">
-            <div class="modal__header">
-                <h2 class="modal__title">Форма обратной связи</h2>
-            </div>
-            
-            <div class="modal__content">
-                <form class="form" id="feedbackForm" method="dialog">
-                    <div class="form__group">
-                        <label class="form__label" for="name">
-                            Имя <span class="form__required">*</span>
-                        </label>
-                        <input class="form__input" type="text" id="name" name="name" required placeholder="Введите ваше имя">
-                    </div>
-
-                    <div class="form__group">
-                        <label class="form__label" for="phone">
-                            Телефон <span class="form__required">*</span>
-                        </label>
-                        <input class="form__input" type="tel" id="phone" name="phone" required placeholder="+7 (XXX) XXX-XX-XX">
-                    </div>
-
-                    <div class="form__group">
-                        <label class="form__label" for="email">
-                            Электронная почта <span class="form__required">*</span>
-                        </label>
-                        <input class="form__input" type="email" id="email" name="email" required placeholder="example@mail.ru/gmail.com">
-                    </div>
-
-                    <div class="form__group">
-                        <label class="form__label" for="category">
-                            Категория обращения <span class="form__required">*</span>
-                        </label>
-                        <select class="form__select" id="category" name="category" required>
-                            <option value="">Выберите категорию</option>
-                            <option value="technical">Техническая поддержка</option>
-                            <option value="commercial">Коммерческое предложение</option>
-                            <option value="cooperation">Сотрудничество</option>
-                            <option value="complaint">Жалоба</option>
-                            <option value="suggestion">Предложение</option>
-                            <option value="other">Другое</option>
-                            <option value="bag">Нашли баг</option>
-                        </select>
-                    </div>
-
-                    <div class="form__group">
-                        <label class="form__label" for="message">
-                            Текст обращения <span class="form__required">*</span>
-                        </label>
-                        <textarea class="form__textarea" id="message" name="message" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
-                    </div>
-
-                    <div class="form__actions">
-                        <button type="submit" class="button button--secondary">Отмена</button>
-                        <button type="button" class="button button--primary" onclick="submitForm()">Отправить</button>
-                    </div>
-                </form>
-            </div>
-        </dialog>
     </div>
 
     <script>
@@ -591,44 +841,221 @@
 
         function updateThemeButton(theme) {
             themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+            themeToggle.setAttribute('aria-pressed', theme === 'dark');
         }
 
-        // Функционал формы
-        function submitForm() {
-            const form = document.getElementById('feedbackForm');
-            const formData = new FormData(form);
+        // Валидация формы
+        const form = document.getElementById('feedback-form');
+        const notification = document.getElementById('notification');
+        
+        // Показываем ошибки при потере фокуса
+        const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                input.setAttribute('aria-invalid', 'false');
+                const errorElement = document.getElementById(input.id + '-error');
+                if (errorElement) errorElement.style.display = 'none';
+            });
+        });
+        
+        function validateField(field) {
+            const isValid = field.checkValidity();
+            const errorElement = document.getElementById(field.id + '-error');
             
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
+            field.setAttribute('aria-invalid', !isValid);
+            
+            if (errorElement) {
+                errorElement.style.display = isValid ? 'none' : 'block';
             }
-
-            const data = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                email: formData.get('email'),
-                category: formData.get('category'),
-                message: formData.get('message')
-            };
-
-            console.log('Данные формы:', data);
             
-            alert('Спасибо! Ваше обращение отправлено на рассмотрение. Мы свяжемся с вами, как только будет готов ответ.');
-            
-            contactModal.close();
-            form.reset();
+            return isValid;
         }
-
-        document.getElementById('contactModal').addEventListener('click', function(event) {
-            if (event.target === this) {
-                this.close();
+        
+        // Обработка отправки формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+            
+            if (isValid) {
+                // Симуляция отправки формы
+                showNotification('Сообщение успешно отправлено!');
+                form.reset();
+                
+                // Сбрасываем состояния доступности
+                inputs.forEach(input => {
+                    input.setAttribute('aria-invalid', 'false');
+                    const errorElement = document.getElementById(input.id + '-error');
+                    if (errorElement) errorElement.style.display = 'none';
+                });
+            } else {
+                showNotification('Пожалуйста, исправьте ошибки в форме', 'error');
+                // Фокусируемся на первом невалидном поле
+                const firstInvalid = form.querySelector('[aria-invalid="true"]');
+                if (firstInvalid) {
+                    firstInvalid.focus();
+                }
             }
         });
-
-        document.getElementById('feedbackForm').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter' && event.target.type !== 'textarea') {
-                event.preventDefault();
+        
+        // Функция копирования текста
+        document.querySelectorAll('.copy-btn[data-copy]').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.getAttribute('data-copy');
+                copyToClipboard(text, this);
+            });
+        });
+        
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Сохраняем оригинальный текст кнопки
+                const originalText = button.textContent;
+                const originalLabel = button.getAttribute('aria-label');
+                
+                // Меняем состояние кнопки
+                button.textContent = 'Скопировано!';
+                button.setAttribute('aria-label', 'Текст скопирован в буфер обмена');
+                button.classList.add('copied');
+                
+                // Показываем уведомление
+                showNotification('Текст скопирован в буфер обмена!');
+                
+                // Возвращаем оригинальное состояние через 2 секунды
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.setAttribute('aria-label', originalLabel);
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+                showNotification('Не удалось скопировать текст', 'error');
+            });
+        }
+        
+        // Показ уведомлений
+        function showNotification(message, type = 'success') {
+            notification.textContent = message;
+            notification.className = 'notification';
+            
+            if (type === 'error') {
+                notification.classList.add('error');
+                notification.setAttribute('aria-live', 'assertive');
+            } else {
+                notification.classList.remove('error');
+                notification.setAttribute('aria-live', 'polite');
             }
+            
+            // Добавляем класс для анимации
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Скрываем уведомление через 3 секунды
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+            
+            // Создаем скрытый элемент для скринридеров
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+            announcement.setAttribute('role', 'alert');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            announcement.lang = 'ru';
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 100);
+        }
+        
+        // Обработка клавиатуры
+        document.addEventListener('keydown', function(e) {
+            // Escape закрывает уведомления
+            if (e.key === 'Escape' && notification.classList.contains('show')) {
+                notification.classList.remove('show');
+            }
+            
+            // Tab показывает фокус
+            if (e.key === 'Tab') {
+                document.body.classList.add('show-focus');
+            }
+            
+            // Enter/Space на кнопках
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('button, [role="button"]')) {
+                e.preventDefault();
+                e.target.click();
+            }
+        });
+        
+        // Логический порядок фокуса
+        const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+        const focusable = document.querySelectorAll(focusableElements);
+        const firstFocusable = focusable[0];
+        const lastFocusable = focusable[focusable.length - 1];
+        
+        // Trap focus в модальных окнах
+        function trapFocus(element) {
+            const focusableContent = element.querySelectorAll(focusableElements);
+            const firstFocusableElement = focusableContent[0];
+            const lastFocusableElement = focusableContent[focusableContent.length - 1];
+            
+            element.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusableElement) {
+                            lastFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusableElement) {
+                            firstFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            // Фокусируемся на основном контенте при переходе по skip-link
+            const skipLink = document.getElementById('skip-link');
+            const mainContent = document.getElementById('main-content');
+            
+            skipLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                mainContent.focus();
+                mainContent.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Устанавливаем правильные заголовки для скринридеров
+            const pageTitle = document.querySelector('.contacts-title');
+            if (pageTitle) {
+                pageTitle.setAttribute('tabindex', '-1');
+            }
+            
+            // Добавляем ARIA-label для кнопок без текста
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                if (!button.textContent.trim() && !button.getAttribute('aria-label')) {
+                    button.setAttribute('aria-label', 'Кнопка');
+                }
+            });
+            
+            // Устанавливаем язык для всех динамических элементов
+            const dynamicElements = document.querySelectorAll('[role="alert"], [aria-live]');
+            dynamicElements.forEach(el => {
+                if (!el.getAttribute('lang')) {
+                    el.setAttribute('lang', 'ru');
+                }
+            });
         });
     </script>
 </body>

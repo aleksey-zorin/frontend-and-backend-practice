@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты - StudentDev Portfolio</title>
+    <link rel="stylesheet" href="../style/styles.css">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <div class="container">
+                <div class="header__content">
+                    <h1 class="header__title">Зорин Алексей</h1>
+                    <p class="header__subtitle">Студент-разработчик</p>
+                </div>
+            </div>
+        </header>
+
+        <nav class="nav">
+            <div class="container">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="../index.html" class="nav__link">Главная</a>
+                    </li>
+                    <li class="nav__item nav__item--active">
+                        <a href="projects.html" class="nav__link">Проекты</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="diary.html" class="nav__link">Дневник</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="contacts.html" class="nav__link">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main">
+            <div class="container">
+                <div class="projects__header">
+                    <h2 class="section-title">Мои проекты</h2>
+                    <div class="projects__filters">
+                        <button class="filter filter--active">Все</button>
+                        <button class="filter">Веб-разработка</button>
+                        <button class="filter">JavaScript</button>
+                        <button class="filter">React</button>
+                        <button class="filter">С++</button>
+                    </div>
+                </div>
+
+                <div class="projects__grid">
+                    <article class="project-card">
+                        <div class="project-card__image">
+                            <picture>
+                                <source srcset="../images/project1.webp" type="image/webp">
+                                <source media="(min-width: 1200px)" srcset="../images/project1-desktop.jpg">
+                                <source media="(min-width: 768px)" srcset="../images/project1-tablet.jpg">
+                                <img src="../images/project1-mobile.jpg" 
+                                     alt="Личный сайт портфолио"
+                                     class="project-card__img responsive-image"
+                                     loading="lazy">
+                            </picture>
+                        </div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Личный сайт-портфолио</h3>
+                            <p class="project-card__description">
+                                Полностью адаптивный сайт-портфолио с современным дизайном. 
+                                Включает главную страницу, проекты, дневник обучения и контакты.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Адаптивность</span>
+                            </div>
+                            <button class="button button--primary project-card__button">
+                                Подробнее
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-card__image">
+                            <picture>
+                                <source srcset="../images/project2.webp" type="image/webp">
+                                <source media="(min-width: 1200px)" srcset="../images/project2-desktop.jpg">
+                                <source media="(min-width: 768px)" srcset="../images/project2-tablet.jpg">
+                                <img src="../images/project2-mobile.jpg" 
+                                     alt="Генератор имен"
+                                     class="project-card__img responsive-image"
+                                     loading="lazy">
+                            </picture>
+                        </div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Генератор имен</h3>
+                            <p class="project-card__description">
+                                Приложение для генерации неоыбчных имен, кличек питомцу, прозвищ в игре. Управление осуществляется средставами 
+                                выбора категории и последующей генерации. Имеет избранные имена и историю генерации.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">С++</span>
+                                <span class="tag">LocalStorage</span>
+                                <span class="tag">QtCreator</span>
+                            </div>
+                            <button class="button button--primary project-card__button">
+                                Подробнее
+                            </button>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <div class="project-card__image">
+                            <picture>
+                                <source srcset="../images/project3.webp" type="image/webp">
+                                <source media="(min-width: 1200px)" srcset="../images/project3-desktop.jpg">
+                                <source media="(min-width: 768px)" srcset="../images/project3-tablet.jpg">
+                                <img src="../images/project3-mobile.jpg" 
+                                     alt="Конвертер температур"
+                                     class="project-card__img responsive-image"
+                                     loading="lazy">
+                            </picture>
+                        </div>
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">Конвертер температур</h3>
+                            <p class="project-card__description">
+                                Приложение для конвертации °C -> °F и наоборот. При пустых полях выводит разницу между 0°C и значением в °F.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">React</span>
+                            </div>
+                            <button class="button button--primary project-card__button">
+                                Подробнее
+                            </button>
+                        </div>
+                    </article>
+                </div>
+
+                <section class="adaptive-demo">
+                    <h2 class="section-title">Техники адаптивных изображений</h2>
+                    
+                    <div class="technique">
+                        <h3>1. Базовое адаптивное изображение</h3>
+                        <div class="image-demo">
+                            <img src="../images/landscape.jpg" 
+                                 alt="Пример адаптивного изображения"
+                                 class="responsive-image">
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h3>2. Picture element с разными форматами</h3>
+                        <div class="image-demo">
+                            <picture>
+                                <source srcset="../images/portrait.webp" type="image/webp">
+                                <img src="../images/portrait.jpg" 
+                                     alt="Пример picture element"
+                                     class="responsive-image">
+                            </picture>
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h3>3. Object-fit свойства</h3>
+                        <div class="object-fit-demo">
+                            <div class="object-fit-item">
+                                <img src="../images/square.jpg" 
+                                     alt="Cover пример"
+                                     class="object-fit-cover">
+                                <span>object-fit: cover</span>
+                            </div>
+                            <div class="object-fit-item">
+                                <img src="../images/square.jpg" 
+                                     alt="Contain пример"
+                                     class="object-fit-contain">
+                                <span>object-fit: contain</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+<footer class="footer">
+            <div class="container">
+                <div class="footer__content">
+                    <p class="footer__copyright">&copy;Человек года 2006. 2025. Зорин Portfolio</p>
+                    <div class="footer__links">
+                        <a href="nemail.ru" class="footer__link">aleksey.zorin8@nemail.ru</a>
+                        <a href="https://steam" class="footer__link">Steam</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(img => imageObserver.observe(img));
+        });
+    </script>
+</body>
+</html>
